@@ -12,12 +12,12 @@ matrix:
     encoding: utf-8
   pipeline:
   - pyspelling.filters.javascript:
-    comments: true
-    docstrings: true
+    jsdocs: true
+    line_comments: true
+    block_comments: true
     group_comments: false
     decode_escapes: true
     strings: false
-    string_types: fu
 - name: Vue
   sources:
   - '**/*.vue'
@@ -31,12 +31,12 @@ matrix:
     encoding: utf-8
   pipeline:
   - pyspelling.filters.javascript:
-    comments: true
-    docstrings: true
+    jsdocs: true
+    line_comments: true
+    block_comments: true
     group_comments: false
     decode_escapes: true
     strings: false
-    string_types: fu
   - pyspelling.filters.html:
     comments: true
     attributes:
@@ -44,30 +44,11 @@ matrix:
     - alt
     ignores:
     - :matches(code, pre)
+    - code
+    - pre
   - pyspelling.filters.stylesheets:
-    stylesheets:
-    - scss
-    - sass
-    - css
-- name: StyleSheets
-  dictionary:
-    wordlists:
-    - wordlist.txt
-    output: wordlist.dic
-    encoding: utf-8
-  pipeline:
-  - pyspelling.filters.stylesheets:
-    stylesheets:
-    - scss
-    - sass
-    - css
-  default_encoding: utf-8
-  sources:
-  - '**/*.css'
-  - '**/*.scss'
-  - '**/*.sass'
-  expect_match: false
 - name: Markdown
+  expect_match: false
   apsell:
     mode: en
   dictionary:
@@ -77,11 +58,30 @@ matrix:
     encoding: utf-8
   pipeline:
   - pyspelling.filters.markdown:
+    markdown_extensions:
+    - markdown.extensions.fenced_code
+    - markdown.extensions.extra
+    - markdown.extensions.md_in_html
+  # Ignore text between inline back ticks
+  - pyspelling.filters.context:
+    context_visible_first: true
+    escapes: '\\[\\`~]'
+    delimiters:
+    - open: '(?P<open>`+)'
+      close: '(?P=open)'
   - pyspelling.filters.html:
+    comments: true
+    attributes:
+    - title
+    - alt
+    ignores:
+    - :matches(code, pre)
+    - code
+    - pre
   sources:
   - '**/*.md'
-  expect_match: false
 - name: HTML
+  expect_match: false
   apsell:
     mode: en
   dictionary:
@@ -91,13 +91,18 @@ matrix:
     encoding: utf-8
   pipeline:
   - pyspelling.filters.html:
+    comments: true
+    attributes:
+    - title
+    - alt
+    ignores:
+    - :matches(code, pre)
   sources:
   - '**/*.html'
-  expect_match: false
 - name: Text
+  expect_match: false
   sources:
   - '**/*.txt'
-  expect_match: false
   dictionary:
     wordlists:
     - wordlist.txt
