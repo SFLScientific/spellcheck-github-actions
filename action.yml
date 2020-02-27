@@ -1,0 +1,11 @@
+name: "Check Spelling (JS, Vue, HTML, Markdown, Text)"
+description: "Check spelling in a repo"
+branding:
+  icon: "info"
+  color: "yellow"
+outputs:
+  changed:
+    description: "Check code files for spelling errors"
+runs:
+  using: "docker"
+  image: "Dockerfile"

@@ -1,7 +1,8 @@
 matrix:
-- name: Python
+- name: JavaScript
   sources:
-  - '**/*.py'
+  - '**/*.js'
+  expect_match: false
   aspell:
     lang: en
   dictionary:
@@ -10,16 +11,37 @@ matrix:
     output: wordlist.dic
     encoding: utf-8
   pipeline:
-  - pyspelling.filters.python:
+  - pyspelling.filters.javascript:
     comments: true
     docstrings: true
     group_comments: false
     decode_escapes: true
     strings: false
     string_types: fu
+- name: Vue
+  sources:
+  - '**/*.vue'
+  expect_match: false
+  aspell:
+    lang: en
+  dictionary:
+    wordlists:
+    - wordlist.txt
+    output: wordlist.dic
+    encoding: utf-8
+  pipeline:
+  - pyspelling.filters.javascript:
+    comments: true
+    docstrings: true
+    group_comments: false
+    decode_escapes: true
+    strings: false
+    string_types: fu
+  - pyspelling.filters.html:
+  - pyspelling.filters.stylesheets:
 - name: Markdown
   apsell:
-    mode: none
+    mode: en
   dictionary:
     wordlists:
     - wordlist.txt
@@ -30,9 +52,24 @@ matrix:
   - pyspelling.filters.html:
   sources:
   - '**/*.md'
+  expect_match: false
+- name: HTML
+  apsell:
+    mode: en
+  dictionary:
+    wordlists:
+    - wordlist.txt
+    output: wordlist.dic
+    encoding: utf-8
+  pipeline:
+  - pyspelling.filters.html:
+  sources:
+  - '**/*.html'
+  expect_match: false
 - name: Text
   sources:
   - '**/*.txt'
+  expect_match: false
   dictionary:
     wordlists:
     - wordlist.txt
