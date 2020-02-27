@@ -12,12 +12,12 @@ matrix:
     encoding: utf-8
   pipeline:
   - pyspelling.filters.javascript:
-    jsdocs: true
-    line_comments: true
-    block_comments: true
-    group_comments: false
-    decode_escapes: true
-    strings: false
+      jsdocs: true
+      line_comments: true
+      block_comments: true
+      group_comments: false
+      decode_escapes: true
+      strings: false
 - name: Vue
   sources:
   - '**/*.vue'
@@ -31,22 +31,44 @@ matrix:
     encoding: utf-8
   pipeline:
   - pyspelling.filters.javascript:
-    jsdocs: true
-    line_comments: true
-    block_comments: true
-    group_comments: false
-    decode_escapes: true
-    strings: false
+      jsdocs: true
+      line_comments: true
+      block_comments: true
+      group_comments: false
+      decode_escapes: true
+      strings: false
   - pyspelling.filters.html:
-    comments: true
-    attributes:
-    - title
-    - alt
-    ignores:
-    - :matches(code, pre)
-    - code
-    - pre
+      comments: true
+      attributes:
+      - title
+      - alt
+      ignores:
+      - ':matches(code, pre)'
+      - 'code'
+      - 'pre'
   - pyspelling.filters.stylesheets:
+      group_comments: true
+- name: HTML
+  sources:
+  - '**/*.html'
+  expect_match: false
+  apsell:
+    mode: en
+  dictionary:
+    wordlists:
+    - wordlist.txt
+    output: wordlist.dic
+    encoding: utf-8
+  pipeline:
+  - pyspelling.filters.html:
+      comments: true
+      attributes:
+      - title
+      - alt
+      ignores:
+      - ':matches(code, pre)'
+      - 'code'
+      - 'pre'
 - name: Markdown
   expect_match: false
   apsell:
@@ -58,51 +80,24 @@ matrix:
     encoding: utf-8
   pipeline:
   - pyspelling.filters.markdown:
-    markdown_extensions:
-    - markdown.extensions.fenced_code
-    - markdown.extensions.extra
-    - markdown.extensions.md_in_html
-  # Ignore text between inline back ticks
-  - pyspelling.filters.context:
-    context_visible_first: true
-    escapes: '\\[\\`~]'
-    delimiters:
-    - open: '(?P<open>`+)'
-      close: '(?P=open)'
+      markdown_extensions:
+      - markdown.extensions.extra:
   - pyspelling.filters.html:
-    comments: true
-    attributes:
-    - title
-    - alt
-    ignores:
-    - :matches(code, pre)
-    - code
-    - pre
+      comments: true
+      attributes:
+      - title
+      - alt
+      ignores:
+      - ':matches(code, pre)'
+      - 'code'
+      - 'pre'
   sources:
   - '**/*.md'
-- name: HTML
-  expect_match: false
-  apsell:
-    mode: en
-  dictionary:
-    wordlists:
-    - wordlist.txt
-    output: wordlist.dic
-    encoding: utf-8
-  pipeline:
-  - pyspelling.filters.html:
-    comments: true
-    attributes:
-    - title
-    - alt
-    ignores:
-    - :matches(code, pre)
-  sources:
-  - '**/*.html'
 - name: Text
-  expect_match: false
   sources:
-  - '**/*.txt'
+  - '**/*.txt|!wordlist.txt'
+  ignores:
+  expect_match: false
   dictionary:
     wordlists:
     - wordlist.txt
