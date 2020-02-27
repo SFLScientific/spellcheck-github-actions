@@ -1,4 +1,4 @@
-FROM python:3.7-alpine3.10
+FROM python:3.7
 
 LABEL "repository"="https://github.com/UnicornGlobal/spellcheck-github-actions"
 LABEL "homepage"="https://github.com/actions"
