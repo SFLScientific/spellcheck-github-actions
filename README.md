@@ -15,5 +15,3 @@ See https://facelessuser.github.io/pyspelling/configuration/ for options.
 Based on `rojopolis/spellcheck-github-actions`
 
 That repo was not working for us so we made this fork
-
-missspelleed worrd
