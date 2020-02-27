@@ -4,3 +4,9 @@ PySpelling
 config
 repo
 yaml
+vue
+vuerouter
+vuex
+js
+src
+svg

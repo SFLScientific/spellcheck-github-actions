@@ -38,7 +38,35 @@ matrix:
     strings: false
     string_types: fu
   - pyspelling.filters.html:
+    comments: true
+    attributes:
+    - title
+    - alt
+    ignores:
+    - :matches(code, pre)
   - pyspelling.filters.stylesheets:
+    stylesheets:
+    - scss
+    - sass
+    - css
+- name: StyleSheets
+  dictionary:
+    wordlists:
+    - wordlist.txt
+    output: wordlist.dic
+    encoding: utf-8
+  pipeline:
+  - pyspelling.filters.stylesheets:
+    stylesheets:
+    - scss
+    - sass
+    - css
+  default_encoding: utf-8
+  sources:
+  - '**/*.css'
+  - '**/*.scss'
+  - '**/*.sass'
+  expect_match: false
 - name: Markdown
   apsell:
     mode: en
