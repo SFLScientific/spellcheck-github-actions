@@ -1,5 +1,9 @@
 # spellcheck-github-actions
 
+## Forked from https://github.com/UnicornGlobal/spellcheck-github-actions 
+
+## Changes: the spellcheck.yaml and wordlist.txt can be anywhere in the repo (including the .github folder for cleaner repos)
+
 A Github Action that spell checks JavaScript, Vue, Markdown, HTML, and Text files.
 
 This action uses [PySpelling](https://facelessuser.github.io/pyspelling/) to
