@@ -1,4 +1,4 @@
-name: "Check Spelling (JS, Vue, HTML, Markdown, Text)"
+name: "Check Spelling (JS, Vue, HTML, Markdown, Text) [Forked][wordlist + spellcheck freedom]"
 description: "Check spelling in a repo"
 branding:
   icon: "info"
