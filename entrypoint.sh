@@ -3,7 +3,7 @@
 
 find_file(){
     # Find a desired file and copy it to pwd
-    DEAFULT=.github/defaults/$1
+    DEAFULT=.github/default/$1
     CUSTOM=.github/custom/$1
 
     if test -f "$CUSTOM"; then
